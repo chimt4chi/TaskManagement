@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
 
@@ -8,7 +8,8 @@ interface TodoFormProps {
   editMode: boolean;
   onInputChange: (value: string) => void;
   onDescriptionChange: (value: string) => void;
-  onSubmit: () => void;
+  // onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSave: () => void;
 }
 
 const style = {
@@ -23,10 +24,15 @@ const TodoForm: React.FC<TodoFormProps> = ({
   editMode,
   onInputChange,
   onDescriptionChange,
-  onSubmit,
+  // onSubmit,
+  onSave,
 }) => {
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault(); // Prevent form submission and reloading
+    onSave(); // Handle form submission manually
+  };
   return (
-    <form className={style.form} onSubmit={onSubmit}>
+    <form className={style.form} onSubmit={handleSubmit}>
       <input
         className={style.input}
         value={input}

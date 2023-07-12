@@ -59,8 +59,6 @@ const TodoList: React.FC = observer(() => {
     },
 
     createOrUpdateTodo() {
-      // event.preventDefault(); // Prevent form submission and reloading
-
       if (!this.input) {
         alert("Please enter a valid todo");
         return;
@@ -80,7 +78,7 @@ const TodoList: React.FC = observer(() => {
         this.todos = updatedTodos;
         this.editMode = false;
         this.editTodoId = "";
-        this.showEditModal = false; // Close the edit modal after updating
+        this.showEditModal = false;
       } else {
         const newTodo: Todo = {
           id: String(Date.now()),
@@ -91,6 +89,7 @@ const TodoList: React.FC = observer(() => {
         this.todos.push(newTodo);
       }
       this.clearInputs();
+      this.saveTodosToLocalStorage(); // Save the todos to localStorage after modification
     },
 
     editTodo(id: string) {
@@ -116,6 +115,7 @@ const TodoList: React.FC = observer(() => {
       );
       this.todos = updatedTodos;
       this.showDeleteModal = false;
+      this.saveTodosToLocalStorage(); // Save the todos to localStorage after deletion
     },
 
     closeModal() {
@@ -135,6 +135,7 @@ const TodoList: React.FC = observer(() => {
         return todo;
       });
       this.todos = updatedTodos;
+      this.saveTodosToLocalStorage(); // Save the todos to localStorage after completion toggle
     },
 
     get todoText() {
@@ -157,10 +158,6 @@ const TodoList: React.FC = observer(() => {
     todoStore.loadTodosFromLocalStorage();
   }, []);
 
-  useEffect(() => {
-    todoStore.saveTodosToLocalStorage();
-  }, [todoStore.todos]);
-
   return (
     <div className={style.bg}>
       <div className={style.container}>
@@ -171,7 +168,8 @@ const TodoList: React.FC = observer(() => {
           editMode={todoStore.editMode}
           onInputChange={(value) => (todoStore.input = value)}
           onDescriptionChange={(value) => (todoStore.description = value)}
-          onSubmit={todoStore.createOrUpdateTodo}
+          // onSubmit={todoStore.createOrUpdateTodo}
+          onSave={todoStore.createOrUpdateTodo}
         />
         <table className={style.table}>
           <thead>
