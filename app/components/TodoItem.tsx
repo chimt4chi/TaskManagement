@@ -10,7 +10,7 @@ interface TodoItem {
 
 const style = {
   tableRow: `border-b bg-dark-table-row`,
-  tableCell: `p-4 text-white text-center items-center justify-center break-all `,
+  tableCell: `p-4 text-white text-center items-center justify-center break-all truncate md:max-w-md`,
   tableActions: `flex items-center justify-center`,
   editButton: `p-2 ml-2 text-blue-500 hover:scale-125`,
   deleteButton: `p-2 ml-2 text-red-500 hover:scale-125`,
@@ -34,10 +34,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
   return (
     <tr className={style.tableRow}>
       <td className={style.tableCell}>{index + 1}</td>
-      <td className={`${style.tableCell} truncate md:max-w-md`}>{todo.text}</td>
-      <td className={`${style.tableCell} truncate md:max-w-md`}>
-        {todo.description}
-      </td>
+      <td className={`${style.tableCell}`}>{todo.text}</td>
+      <td className={`${style.tableCell} `}>{todo.description}</td>
       <td className={style.tableCell}>
         <div className="flex items-center justify-center ">
           <input
@@ -76,4 +74,3 @@ const TodoItem: React.FC<TodoItemProps> = ({
 };
 
 export default TodoItem;
-

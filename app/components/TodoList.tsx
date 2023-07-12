@@ -18,9 +18,7 @@ interface Todo {
 const style = {
   // Styles...
   bg: `p-4 bg-dark-mode bg-no-repeat bg-cover bg-center`,
-  // container: `bg-dark-table h-full max-w-[100vw] w-full m-auto rounded-md shadow-xl p-4`,
   container: `bg-dark-table min-h-screen max-w-[100vw] w-full m-auto rounded-md shadow-xl p-4`,
-
   heading: `text-3xl font-bold text-center text-gray-300 p-2`,
   form: `flex flex-col md:flex-row gap-2 md:gap-4`,
   input: `bg-gray-200 p-2 w-full md:w-3/4 text-xl text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500`,
@@ -170,32 +168,33 @@ const TodoList: React.FC = observer(() => {
           editMode={todoStore.editMode}
           onInputChange={(value) => (todoStore.input = value)}
           onDescriptionChange={(value) => (todoStore.description = value)}
-          // onSubmit={todoStore.createOrUpdateTodo}
           onSave={todoStore.createOrUpdateTodo}
         />
-        <table className={style.table}>
-          <thead>
-            <tr>
-              <th className={style.tableHeader}>#</th>
-              <th className={style.tableHeader}>Tasks</th>
-              <th className={style.tableHeader}>Description</th>
-              <th className={style.tableHeader}>Status</th>
-              <th className={style.tableHeader}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {todoStore.todos.map((todo: TodoItem, index: number) => (
-              <TodoItem
-                key={todo.id}
-                todo={todo}
-                index={index}
-                onToggleCompletion={todoStore.toggleCompletion}
-                onEdit={todoStore.editTodo}
-                onDelete={todoStore.deleteTodo}
-              />
-            ))}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto">
+          <table className={style.table}>
+            <thead>
+              <tr>
+                <th className={style.tableHeader}>#</th>
+                <th className={style.tableHeader}>Tasks</th>
+                <th className={style.tableHeader}>Description</th>
+                <th className={style.tableHeader}>Status</th>
+                <th className={style.tableHeader}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {todoStore.todos.map((todo: TodoItem, index: number) => (
+                <TodoItem
+                  key={todo.id}
+                  todo={todo}
+                  index={index}
+                  onToggleCompletion={todoStore.toggleCompletion}
+                  onEdit={todoStore.editTodo}
+                  onDelete={todoStore.deleteTodo}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
         {todoStore.todos.length > 0 && (
           <TodoCount todoCount={todoStore.todos.length} />
         )}
@@ -223,4 +222,3 @@ const TodoList: React.FC = observer(() => {
 });
 
 export default TodoList;
-
