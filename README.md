@@ -1,9 +1,34 @@
-What is this app?
-This app is a Task Management App that is built with Next.js, Typescript, Tailwind CSS, MobX and localStorage.
+# Task Management App
 
-If you want to run this app on development.
-install the necessary tools. i.e next.js, tailwindcss, react icons, mobx-react-lite and clone the repo
-These tools will make the app running in the development
+This is a simple task management application built with React and MobX.
 
-also i'm gonna add toggle button for the dark and light mode and the timer for the particular task later on.
+## Features
 
+- Add new tasks with a title and description
+- Edit existing tasks
+- Delete tasks
+- Mark tasks as completed
+- Local storage support for persisting tasks
+
+## Installation
+
+1. Clone the repository:
+   git clone https://github.com/chimt4chi/TaskManagement.git
+   
+2. Navigate to the project directory:
+   cd task-management-app
+
+3. Install the dependencies:
+  npm install
+4. Start the application:
+  npm start
+The app will be running at http://localhost:3000.
+
+Usage
+Enter a task title and description in the input fields and click "Add" to create a new task.
+Click on the task checkbox to mark it as completed.
+Click the "Edit" button to modify the task title and description.
+Click the "Delete" button to remove the task from the list.
+
+Contributing
+Contributions are welcome! If you find any issues or want to suggest improvements, please open an issue or submit a pull request.
