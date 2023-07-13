@@ -8,14 +8,14 @@ interface TodoFormProps {
   editMode: boolean;
   onInputChange: (value: string) => void;
   onDescriptionChange: (value: string) => void;
-  // onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onSave: () => void;
+  onEditModeChange: (value: boolean) => void; // Add this prop to handle edit mode change
 }
 
 const style = {
   form: `flex flex-col md:flex-row gap-2 md:gap-4`,
   input: `bg-gray-200 p-2 w-full md:w-3/4 text-xl text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500`,
-  button: `p-4 ml-2 bg-purple-500 text-slate-100 rounded hover:bg-purple-600 transition-colors duration-300`,
+  button: `p-2 bg-purple-500 text-slate-100 rounded hover:bg-purple-600 transition-colors duration-300`,
 };
 
 const TodoForm: React.FC<TodoFormProps> = ({
@@ -24,13 +24,15 @@ const TodoForm: React.FC<TodoFormProps> = ({
   editMode,
   onInputChange,
   onDescriptionChange,
-  // onSubmit,
   onSave,
+  onEditModeChange,
 }) => {
   const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault(); // Prevent form submission and reloading
-    onSave(); // Handle form submission manually
+    event.preventDefault();
+    onSave();
+    onEditModeChange(false); // Reset edit mode to "add mode"
   };
+
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       <input
@@ -48,7 +50,11 @@ const TodoForm: React.FC<TodoFormProps> = ({
         placeholder="Description"
       />
       <button type="submit" className={style.button}>
-        {editMode ? <FaEdit size={20} /> : <AiOutlinePlus size={30} />}
+        {editMode ? (
+          <FaEdit size={30} className="inline" />
+        ) : (
+          <AiOutlinePlus size={30} className="inline" />
+        )}
       </button>
     </form>
   );

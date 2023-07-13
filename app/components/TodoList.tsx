@@ -25,7 +25,7 @@ const style = {
   button: `p-4 ml-2 bg-purple-500 text-slate-100 rounded hover:bg-purple-600 transition-colors duration-300`,
   count: `text-center p-2 text-white`,
   table: `table w-full mt-8`,
-  tableHeader: `bg-table-head text-black font-bold uppercase text-sm p-2`,
+  tableHeader: `bg-table-head text-white font-bold uppercase text-sm p-2`,
   tableRow: `border-b`,
   tableCell: `p-4 text-white text-center items-center justify-center break-all `,
   tableActions: `flex items-center justify-center`,
@@ -169,13 +169,16 @@ const TodoList: React.FC = observer(() => {
           onInputChange={(value) => (todoStore.input = value)}
           onDescriptionChange={(value) => (todoStore.description = value)}
           onSave={todoStore.createOrUpdateTodo}
+          onEditModeChange={function (value: boolean): void {
+            throw new Error("Function not implemented.");
+          }}
         />
         <div className="overflow-x-auto">
           <table className={style.table}>
             <thead>
               <tr>
                 <th className={style.tableHeader}>#</th>
-                <th className={style.tableHeader}>Tasks</th>
+                <th className={style.tableHeader}>Title</th>
                 <th className={style.tableHeader}>Description</th>
                 <th className={style.tableHeader}>Status</th>
                 <th className={style.tableHeader}>Actions</th>
