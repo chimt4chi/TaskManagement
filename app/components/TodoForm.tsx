@@ -9,13 +9,12 @@ interface TodoFormProps {
   onInputChange: (value: string) => void;
   onDescriptionChange: (value: string) => void;
   onSave: () => void;
-  onEditModeChange: (value: boolean) => void; // Add this prop to handle edit mode change
 }
 
 const style = {
   form: `flex flex-col md:flex-row gap-2 md:gap-4`,
-  input: `bg-gray-200 p-2 w-full md:w-3/4 text-xl text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500`,
-  button: `p-2 bg-purple-500 text-slate-100 rounded hover:bg-purple-600 transition-colors duration-300`,
+  input: `bg-gray-200 p-4 w-full md:w-3/4 text-xl text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-center`,
+  button: `p-4 bg-purple-500 text-slate-100 rounded hover:bg-purple-600 transition-colors duration-300`,
 };
 
 const TodoForm: React.FC<TodoFormProps> = ({
@@ -25,12 +24,10 @@ const TodoForm: React.FC<TodoFormProps> = ({
   onInputChange,
   onDescriptionChange,
   onSave,
-  onEditModeChange,
 }) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onSave();
-    onEditModeChange(false); // Reset edit mode to "add mode"
   };
 
   return (

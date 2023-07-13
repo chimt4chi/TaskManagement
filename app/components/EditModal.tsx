@@ -8,6 +8,7 @@ interface EditModalProps {
   onDescriptionChange: (value: string) => void;
   onSave: () => void;
   onCancel: () => void;
+  resetEditMode: () => void;
 }
 
 const style = {
@@ -30,6 +31,7 @@ const EditModal: React.FC<EditModalProps> = ({
   onDescriptionChange,
   onSave,
   onCancel,
+  resetEditMode,
 }) => {
   return (
     <div className={style.modal}>
@@ -40,7 +42,13 @@ const EditModal: React.FC<EditModalProps> = ({
             onClick={onCancel}
             className="text-red-600 hover:text-red-800"
           >
-            <GiCancel className="text-4xl" />
+            <GiCancel
+              className="text-4xl"
+              onClick={() => {
+                resetEditMode();
+                onCancel();
+              }}
+            />
           </button>
         </div>
         <div className={style.modalBody}>
@@ -67,7 +75,13 @@ const EditModal: React.FC<EditModalProps> = ({
           <button className={style.button} onClick={onSave}>
             Save
           </button>
-          <button className={style.button} onClick={onCancel}>
+          <button
+            className={style.button}
+            onClick={() => {
+              resetEditMode();
+              onCancel();
+            }}
+          >
             Cancel
           </button>
         </div>

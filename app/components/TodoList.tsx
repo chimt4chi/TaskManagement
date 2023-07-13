@@ -104,6 +104,11 @@ const TodoList: React.FC = observer(() => {
       }
     },
 
+    resetEditMode() {
+      this.editMode = false;
+      this.editTodoId = "";
+    },
+
     deleteTodo(id: string) {
       this.deleteTodoId = id;
       this.showDeleteModal = true;
@@ -169,9 +174,6 @@ const TodoList: React.FC = observer(() => {
           onInputChange={(value) => (todoStore.input = value)}
           onDescriptionChange={(value) => (todoStore.description = value)}
           onSave={todoStore.createOrUpdateTodo}
-          onEditModeChange={function (value: boolean): void {
-            throw new Error("Function not implemented.");
-          }}
         />
         <div className="overflow-x-auto">
           <table className={style.table}>
@@ -210,7 +212,10 @@ const TodoList: React.FC = observer(() => {
               (todoStore.description = value)
             }
             onSave={todoStore.createOrUpdateTodo}
-            onCancel={todoStore.closeModal}
+            onCancel={() => {
+              todoStore.closeModal();
+            }}
+            resetEditMode={todoStore.resetEditMode}
           />
         )}
         {todoStore.showDeleteModal && (
