@@ -16,7 +16,7 @@ This is a simple task management application built with React and MobX.
    git clone https://github.com/chimt4chi/TaskManagement.git
    
 2. Navigate to the project directory:
-   cd task-management-app
+   cd TaskManagement
 
 3. Install the dependencies:
   npm install
